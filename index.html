@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+
+    <style>
+
+        body {
+            background-color: #CCC;
+        }
+
+        #canvas {
+            background-color: #FFF;
+        }
+
+    </style>
+
+</head>
+
+<body onload="init()">
+<canvas id="canvas" width="800" height="600"></canvas>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="Box2d.min.js"></script>
+<script src="main.js"></script>
+<script src="fuzzy.js"></script>
+<div><span>Joint angle: </span><span id="jointAngle"></span></div>
+<div><span>Cart velocity: </span><span id="cartVelocity"></span></div>
+<div><span>Fuzzy output: </span><span id="fuzzyOutput"></span></div>
+</body>
+</html>
