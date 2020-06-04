@@ -1,17 +1,27 @@
 const Angle = {
-    VPOS: 120, // Very Positive
-    POS: 60, // Positive
-    NO: 0, // Null
-    NEG: -60, // Negative
-    VNEG: -120 // Very Negative
+    NOP: 0, // Null
+    SP: 45, // Small positive
+    MP: 90, // Medium positive
+    LP: 135, // Large positive
+    VLP: 180, // Very large positive
+
+    VLN: 180, // Very large negative
+    LN: 225, // Large negative
+    MN: 270, // Medium negative
+    SN: 315, // Small negative
+    NON: 360 // Null
 };
 
-const CartForce = {
-    VPOS: 30, // Very Positive
-    POS: 15, // Positive
-    NO: 0, // Null
-    NEG: -15, // Negative
-    VNEG: -30 // Very Negative
+const AngularVelocity = {
+    VLP: 20, // Very large positive
+    VP: 15, // Very positive
+    MP: 10, // Medium positive
+    SP: 5, // Small positive
+    NO: 0, // No
+    SN: -5, // Small negative
+    MN: -10, // Medium negative
+    VN: -15, // Very negative
+    VLN: -20 // Very large negative
 };
 
 // Op types
@@ -19,39 +29,99 @@ const AND = 0;
 const OR = 1;
 
 var rules = [
-    { angle: 120, op: 0, force: 30, z: -30 },
-    { angle: 120, op: 0, force: 15, z: -30 },
-    { angle: 120, op: 0, force: 0, z: -30 },
-    { angle: 120, op: 0, force: -15, z: -15 },
-    { angle: 120, op: 0, force: -30, z: 0 },
+    { angle: 0, op: 0, angularVelocity: 20, z: 0 },
+    { angle: 0, op: 0, angularVelocity: 15, z: 0 },
+    { angle: 0, op: 0, angularVelocity: 10, z: 0 },
+    { angle: 0, op: 0, angularVelocity: 5, z: 0 },
+    { angle: 0, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 0, op: 0, angularVelocity: -5, z: 0 },
+    { angle: 0, op: 0, angularVelocity: -10, z: 0 },
+    { angle: 0, op: 0, angularVelocity: -15, z: 0 },
+    { angle: 0, op: 0, angularVelocity: -20, z: 0 },
 
-    { angle: 60, op: 0, force: 30, z: -30 },
-    { angle: 60, op: 0, force: 15, z: -30 },
-    { angle: 60, op: 0, force: 0, z: -15 },
-    { angle: 60, op: 0, force: -15, z: 0 },
-    { angle: 60, op: 0, force: -30, z: 15 },
+    { angle: 45, op: 0, angularVelocity: 20, z: 0 },
+    { angle: 45, op: 0, angularVelocity: 15, z: 0 },
+    { angle: 45, op: 0, angularVelocity: 10, z: 70 },
+    { angle: 45, op: 0, angularVelocity: 5, z: 70 },
+    { angle: 45, op: 0, angularVelocity: 0, z: 300 },
+    { angle: 45, op: 0, angularVelocity: -5, z: -70 },
+    { angle: 45, op: 0, angularVelocity: -10, z: -70 },
+    { angle: 45, op: 0, angularVelocity: -15, z: 0 },
+    { angle: 45, op: 0, angularVelocity: -20, z: -0 },
 
-    { angle: 0, op: 0, force: 30, z: -15 },
-    { angle: 0, op: 0, force: 15, z: -15 },
-    { angle: 0, op: 0, force: 0, z: 0 },
-    { angle: 0, op: 0, force: -15, z: 15 },
-    { angle: 0, op: 0, force: -30, z: 15 },
+    { angle: 90, op: 0, angularVelocity: 20, z: 10 },
+    { angle: 90, op: 0, angularVelocity: 15, z: 10 },
+    { angle: 90, op: 0, angularVelocity: 10, z: 10 },
+    { angle: 90, op: 0, angularVelocity: 5, z: 10 },
+    { angle: 90, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 90, op: 0, angularVelocity: -5, z: 10 },
+    { angle: 90, op: 0, angularVelocity: -10, z: 10 },
+    { angle: 90, op: 0, angularVelocity: -15, z: 10 },
+    { angle: 90, op: 0, angularVelocity: -20, z: 10 },
 
-    { angle: -60, op: 0, force: 30, z: -15 },
-    { angle: -60, op: 0, force: 15, z: 0 },
-    { angle: -60, op: 0, force: 0, z: 15 },
-    { angle: -60, op: 0, force: -15, z: 30 },
-    { angle: -60, op: 0, force: -30, z: 30 },
+    { angle: 135, op: 0, angularVelocity: 20, z: 5 },
+    { angle: 135, op: 0, angularVelocity: 15, z: 5 },
+    { angle: 135, op: 0, angularVelocity: 10, z: 5 },
+    { angle: 135, op: 0, angularVelocity: 5, z: 5 },
+    { angle: 135, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 135, op: 0, angularVelocity: -5, z: -5 },
+    { angle: 135, op: 0, angularVelocity: -10, z: -5 },
+    { angle: 135, op: 0, angularVelocity: -15, z: -5 },
+    { angle: 135, op: 0, angularVelocity: -20, z: -5 },
 
-    { angle: -120, op: 0, force: 30, z: 0 },
-    { angle: -120, op: 0, force: 15, z: 15 },
-    { angle: -120, op: 0, force: 0, z: 30 },
-    { angle: -120, op: 0, force: -15, z: 30 },
-    { angle: -120, op: 0, force: -30, z: 30 }
+    { angle: 180, op: 0, angularVelocity: 20, z: 10 },
+    { angle: 180, op: 0, angularVelocity: 15, z: 10 },
+    { angle: 180, op: 0, angularVelocity: 10, z: 10 },
+    { angle: 180, op: 0, angularVelocity: 5, z: 50 },
+    { angle: 180, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 180, op: 0, angularVelocity: -5, z: -50 },
+    { angle: 180, op: 0, angularVelocity: -10, z: -10 },
+    { angle: 180, op: 0, angularVelocity: -15, z: -10 },
+    { angle: 180, op: 0, angularVelocity: -20, z: -10 },
+
+    { angle: 225, op: 0, angularVelocity: 20, z: -5 },
+    { angle: 225, op: 0, angularVelocity: 15, z: -5 },
+    { angle: 225, op: 0, angularVelocity: 10, z: -5 },
+    { angle: 225, op: 0, angularVelocity: 5, z: -5 },
+    { angle: 225, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 225, op: 0, angularVelocity: -5, z: 5 },
+    { angle: 225, op: 0, angularVelocity: -10, z: 5 },
+    { angle: 225, op: 0, angularVelocity: -15, z: 5 },
+    { angle: 225, op: 0, angularVelocity: -20, z: 5 },
+
+    { angle: 270, op: 0, angularVelocity: 20, z: 10 },
+    { angle: 270, op: 0, angularVelocity: 15, z: 10 },
+    { angle: 270, op: 0, angularVelocity: 10, z: 10 },
+    { angle: 270, op: 0, angularVelocity: 5, z:  10 },
+    { angle: 270, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 270, op: 0, angularVelocity: -5, z: 10 },
+    { angle: 270, op: 0, angularVelocity: -10, z: 10 },
+    { angle: 270, op: 0, angularVelocity: -15, z: 10 },
+    { angle: 270, op: 0, angularVelocity: -20, z: 10 },
+
+    { angle: 315, op: 0, angularVelocity: 20, z: 0 },
+    { angle: 315, op: 0, angularVelocity: 15, z: 0 },
+    { angle: 315, op: 0, angularVelocity: 10, z: 70 },
+    { angle: 315, op: 0, angularVelocity: 5, z: 70 },
+    { angle: 315, op: 0, angularVelocity: 0, z: -300 },
+    { angle: 315, op: 0, angularVelocity: -5, z: -70 },
+    { angle: 315, op: 0, angularVelocity: -10, z: -70 },
+    { angle: 315, op: 0, angularVelocity: -15, z: 0 },
+    { angle: 315, op: 0, angularVelocity: -20, z: -0 },
+
+    { angle: 360, op: 0, angularVelocity: 20, z: 0 },
+    { angle: 360, op: 0, angularVelocity: 15, z: 0 },
+    { angle: 360, op: 0, angularVelocity: 10, z: 0 },
+    { angle: 360, op: 0, angularVelocity: 5, z: 0 },
+    { angle: 360, op: 0, angularVelocity: 0, z: 0 },
+    { angle: 360, op: 0, angularVelocity: -5, z: 0 },
+    { angle: 360, op: 0, angularVelocity: -10, z: 0 },
+    { angle: 360, op: 0, angularVelocity: -15, z: 0 },
+    { angle: 360, op: 0, angularVelocity: -20, z: 0 }
 ];
 
-function addRule(angle, op, force, z) {
-    rules.push({angle, op, force, z});
+function addRule(angle, op, angularVelocity, z) {
+    rules.push({angle, op, angularVelocity, z});
 }
 
 function MIN(a, b) {
@@ -70,9 +140,9 @@ function MAX(a, b) {
     return b;
 }
 
-function TriangleMemberShipForce(x, m) {
-    const a = m - 15;
-    const b = m + 15;
+function TriangleMemberShipVelocity(x, m) {
+    const a = m - 3;
+    const b = m + 3;
 
     return TriangleMemberShip(x, a, b, m);
 }
@@ -95,18 +165,14 @@ function TriangleMemberShip(x, a, b, m) {
     return mu;
 }
 
-function ProcessRules(angle, force) {
+function ProcessRules(angle, angularVelocity) {
     let summ_alpha_c = 0, summ_alpha = 0;
-
-    if (angle > 180) {
-        angle = (angle - 180) * (-1);
-    }
 
     for (let i = 0; i < rules.length; i++) {
         const muAngle = TriangleMemberShipAngle(angle, rules[i].angle);
-        const muCartForce = TriangleMemberShipForce(force, rules[i].force);
+        const muCartVelocity = TriangleMemberShipVelocity(angularVelocity, rules[i].angularVelocity);
 
-        const alpha = rules[i].op == 0 ? MIN(muAngle, muCartForce) : MAX(muAngle, muCartForce);
+        const alpha = rules[i].op == 0 ? MIN(muAngle, muCartVelocity) : MAX(muAngle, muCartVelocity);
         if (alpha === 0) {
             continue;
         }
@@ -118,17 +184,14 @@ function ProcessRules(angle, force) {
     return summ_alpha_c / summ_alpha;
 }
 
-function InitRules() {
+// function InitRules() {
 
     // for (let termA in Angle) {
-    //     for (let termB in CartForce) {
-    //         addRule(Angle[termA], AND, CartForce[termB], 1);
+    //     for (let termB in AngularVelocity) {
+    //         let rule = { angle: Angle[termA], op: AND, angularVelocity: AngularVelocity[termB], z: 1 };
+    //         addRule(rule);
     //     }
     // }
 
-    //console.log(rules);
+// }
 
-    //console.log("fuzzy-output:", ProcessRules(170, 1));
-}
-
-InitRules();

@@ -23,7 +23,7 @@ var canvas, world;
 
 var jointAngleField, cartVelocityField, fuzzyOutputField;
 
-var cartBody, revoluteJoint;
+var cartBody, pendulumBody, revoluteJoint;
 
 function init() {
     // Define the canvas
@@ -37,7 +37,7 @@ function init() {
 
 function setupPhysics() {
     // Define the world
-    var gravity = new box2d.b2Vec2(0, 10);
+    var gravity = new box2d.b2Vec2(0, 8);
     var doSleep = true;
     world = new box2d.b2World(gravity, doSleep);
 
@@ -53,13 +53,13 @@ function setupPhysics() {
     cartRailFixtureDef.shape = new box2d.b2PolygonShape;
 
     var cartFixtureDef = new box2d.b2FixtureDef;
-    cartFixtureDef.density = 1.0;
+    cartFixtureDef.density = 0.8;
     cartFixtureDef.friction = 0.5;
     cartFixtureDef.restitution = 0.2;
     cartFixtureDef.shape = new box2d.b2PolygonShape;
 
     var pendulumArmFixtureDef = new box2d.b2FixtureDef;
-    pendulumArmFixtureDef.density = 1.0;
+    pendulumArmFixtureDef.density = 0.1;
     pendulumArmFixtureDef.friction = 0.5;
     pendulumArmFixtureDef.restitution = 0.2;
     pendulumArmFixtureDef.shape = new box2d.b2PolygonShape;
@@ -110,7 +110,7 @@ function setupPhysics() {
     pendulumBodyDef.type = box2d.b2Body.b2_dynamicBody;
     pendulumArmFixtureDef.shape.SetAsBox(15 / SCALE, 15 / SCALE);
     pendulumBodyDef.position.Set(400 / SCALE, 0);
-    var pendulumBody = world.CreateBody(pendulumBodyDef);
+    pendulumBody = world.CreateBody(pendulumBodyDef);
     pendulumBody.CreateFixture(pendulumArmFixtureDef)
 
     // joint between cart and pendulum
@@ -120,7 +120,7 @@ function setupPhysics() {
     revoluteJointDef.enableLimit = false;
     revoluteJointDef.localAnchorA = new box2d.b2Vec2(0,0);
     revoluteJointDef.localAnchorB = new box2d.b2Vec2(0,4);
-    revoluteJointDef.localAxisA = new box2d.b2Vec2(1,0);
+    revoluteJointDef.localAxisA = new box2d.b2Vec2(10,30);
     revoluteJoint = world.CreateJoint(revoluteJointDef);
 
     // Setup debug draw
@@ -229,16 +229,19 @@ function update() {
     var jointAngle = normalizeAngle(revoluteJoint.GetJointAngle());
     var jointAngleDeg = radToDegree(jointAngle);
     var cartVelocity = cartBody.GetLinearVelocity();
+    var angularVelocity = pendulumBody.GetAngularVelocity()
 
     jointAngleField.innerText = jointAngleDeg;
-    cartVelocityField.innerText = cartVelocity.x;
+    cartVelocityField.innerText = angularVelocity;
 
-    var fuzzyOutput = ProcessRules(jointAngleDeg, cartVelocity.x);
+    var fuzzyOutput = ProcessRules(jointAngleDeg, angularVelocity);
 
     fuzzyOutputField.innerText = fuzzyOutput;
 
+    //console.log("pendulumBodyAngularVelocity", pendulumBody.GetAngularVelocity());
+
     if (fuzzyOutput) {
-        //fuzzyOutput *= 2;
+        //fuzzyOutput *= 0.5;
         cartBody.ApplyForce(new box2d.b2Vec2(fuzzyOutput, 0), cartBody.GetWorldCenter());
     }
 
